@@ -44,3 +44,7 @@ train a noise predictor
 denoising: initialized by sampling normal distribution noise
 
 ---
+### 服务器
+#### docker
+
+#### 数据传输与训练
