@@ -46,5 +46,10 @@ denoising: initialized by sampling normal distribution noise
 ---
 ### 服务器
 #### docker
+docker镜像提倡精简，也同时意味着少了很多必要的库，报错缺少库依赖也很常见。
+dockerhub  
+docker for ML  
+https://github.com/mortals-debuging/pytorch-docker  
+https://blog.csdn.net/qq_37191476/article/details/131961607
 
 #### 数据传输与训练
