@@ -47,7 +47,9 @@ denoising: initialized by sampling normal distribution noise
 ### 服务器
 使用：
 step1：上传数据
-step2: 镜像下载
+step2: 镜像下载/定制
+step3: 创建交互式开发
+
 #### docker
 镜像(images) 容器(containers)
 Dockerfile
@@ -86,7 +88,13 @@ docker run -d --name my_container my_image
 
 - 环境配置
 选取镜像  
-制作镜像or (console)-> 使用requirement文件（使用conda/pipd）
-![alt text](requirement-environment-1.jpg)
+  - 制作镜像-> 使用requirement文件（使用conda/pipd）
+![alt text](requirement-environment.jpg)
+  - or (console)
+  SSH `apt-get update` or `pip install`
+
+
+## bug
+服务器无conda环境
 
 ---
