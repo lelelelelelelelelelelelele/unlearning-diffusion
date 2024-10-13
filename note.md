@@ -23,7 +23,7 @@ mid journey: during training process, illustrates the results encoded from the d
 
    - **CLIP**: An additional Image Encoder model
    CLIP score: the vectors similarity between the encoded text and encoded generated image representations
- 
+
 #### decoder: 
 feature: Training without knowing the correspondence between images and text 
 intermediate: 
@@ -34,6 +34,7 @@ intermediate:
 #### generation model:
 input: noised image + text  
 output: intermediate  
+text(additional): condition (can be ignored during inferation)
 加噪过程，改为加在中间杂序上，使用auto-encoder的encoder部分
 train a noise predictor
 denoising: initialized by sampling normal distribution noise
@@ -48,11 +49,33 @@ loss function during training:
 4. $\epsilon$ samples from normal distribution ($\mu$ = 0,v = 1)
 5. 
 ![alt text](source/training.jpg)
-<span style="color: red;">inside</span>: weighted sum, noising  
-  the larger t is, the more proportion the noise added
+<span style="color: red;">inside</span>:  weighted sum, noising  
+  the larger t is, the more proportion the noise added  
 <span style="color: blue;">$\epsilon_\theta$</span> : noise predictor
-compared with the target noise you have sampled in **step 4**
+input: noiy image + t(step/iteration)
+output: predicted noise image  
 
+compared with the target noise you have sampled in **step 4**  
+
+**difference with origin steps**
+noise and denoise step by step  < <u>DDPM training </u>> predicting the noise by once  
+why?
+
+#### sample
+generate image
+![alt text](source/sampling.jpg)
+strangeness: elinimate the predicted noise and add a new one afterward (plus signal)
+### theory
+map the generated **distribution** to the actual world distribution
+Q: to measure the similarity of the two-
+A: maximum likelihood Estimation:(MLE)  
+  $P_\theta(x)<->P_{data}(x)$  
+  sample  
+KL deverges: 衡量两种分布差异程度
+  definition：$D_{KL}(P \| Q) = \int p(x) \log \left(\frac{p(x)}{q(x)}\right) dx$
+#### KL divergence
+非对称性
+course:C4 11:30
 
 
 ---
