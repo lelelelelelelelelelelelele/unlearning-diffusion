@@ -2,10 +2,6 @@
 
 denoising diffusion probabilistic models”。
 DDPM: https://arxiv.org/abs/2006.11239
-   
-stable diffusion  
-
-algorithm
 ![alt text](image.png)
 Input: noised image + iteration  
 model
@@ -41,6 +37,19 @@ output: intermediate
 加噪过程，改为加在中间杂序上，使用auto-encoder的encoder部分
 train a noise predictor
 denoising: initialized by sampling normal distribution noise
+<!-- 
+#### VAE & diffusion model -->
+### algorithm  
+#### part 1 training
+
+![alt text](image.png)
+loss function during training:
+2. xo -> clean images
+4. $\epsilon$ samples from normal distribution ($\mu$ = 0,v = 1)
+5. inside: weighted sum, noising  
+  the larger t is, the more proportion the noise added
+$\epsilon_\theta$ : noise predictor
+
 
 ---
 ### 服务器
