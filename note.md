@@ -2,7 +2,7 @@
 
 denoising diffusion probabilistic models”。
 DDPM: https://arxiv.org/abs/2006.11239
-![alt text](image.png)
+![alt text](source/image.png)
 Input: noised image + iteration  
 model
 output: noise predicted -> denoising
@@ -38,8 +38,7 @@ text(additional): condition (can be ignored during inferation)
 加噪过程，改为加在中间杂序上，使用auto-encoder的encoder部分
 train a noise predictor
 denoising: initialized by sampling normal distribution noise
-<!-- 
-#### VAE & diffusion model -->
+
 ### algorithm  
 #### part 1 training
 
@@ -71,11 +70,23 @@ Q: to measure the similarity of the two-
 A: maximum likelihood Estimation:(MLE)  
   $P_\theta(x)<->P_{data}(x)$  
   sample  
-KL deverges: 衡量两种分布差异程度
+**all objective for image generation model**
+
+#### KL divergence 
+KL diverges: 衡量两种分布差异程度
   definition：$D_{KL}(P \| Q) = \int p(x) \log \left(\frac{p(x)}{q(x)}\right) dx$
-#### KL divergence
 非对称性
-course:C4 11:30
+#### VAE encoder & diffusion model
+q(z|x)
+z: distribution (major Gaussians) given the data x (x -> image to imitate)
+maximize louwer bound
+maximize *lower bound of logP(x)*
+VAE:
+$\mathbb{E}_{q(z|x)}[\log{\frac{p(x,z)}{q(z|x)}} ]$
+DDPM: z->x_0
+$\mathbb{E}_{q(x_1:x_T|x)}[\log{\frac{p(x_0:x_T)}{q(x_1:x_T|x)}} ]$
+
+course:C5 000
 
 
 ---
