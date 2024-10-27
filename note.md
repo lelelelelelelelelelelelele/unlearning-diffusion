@@ -1,4 +1,4 @@
-### diffusion 
+## diffusion 
 
 denoising diffusion probabilistic models”。
 DDPM: https://arxiv.org/abs/2006.11239
@@ -17,7 +17,7 @@ mid journey: during training process, illustrates the results encoded from the d
 #### text encoder:
 1. gpt coding/ BIRT
 1. criteria: CLIP score/ FID-10k  
-   - **FID**: standard -> pre-trained CNN classification model -> representation ；   the distance between the representation of the generated images and the representation of the real images (assumption of Gaussians distribution)  
+   - **FID**: standard -> pre-trained CNN classification model -> representation ;   the distance between the representation of the generated images and the representation of the real images (assumption of Gaussians distribution)  
    两组distribution的距离
    limitation: need a large scale of generated images  
 
@@ -64,6 +64,7 @@ why?
 generate image
 ![alt text](source/sampling.jpg)
 strangeness: elinimate the predicted noise and add a new one afterward (plus signal)
+
 ### theory
 map the generated **distribution** to the actual world distribution
 Q: to measure the similarity of the two-
@@ -87,6 +88,36 @@ DDPM: z->x_0
 $\mathbb{E}_{q(x_1:x_T|x)}[\log{\frac{p(x_0:x_T)}{q(x_1:x_T|x)}} ]$
 
 course:C5 000
+
+## unlearning
+
+### related work
+#### concept censorship
+Prior approaches have focused on **dataset filtering [30], post-generation filtering [29], or inference guiding [38]**
+- removal or guidance
+post-hoc: using classifier after training
+adding guidance to the inference process \*[38]
+[38] Patrick Schramowski, Manuel Brack, Björn Deiseroth, and Kristian Kersting. Safe latent diffusion: Mitigating inappropriate degeneration in diffusion models. arXiv preprint arXiv:2211.05105, 2022.
+sota guidance-based approach
+- image cloaking
+  adding adversarial perturbations
+#### model edit
+GAN -> diffusion model
+by a token for a new subject trained using only a handful of images
+#### unlearning
+previous assumption: unintentional memorization; undesired knowledfe is identifiable on a set of training data points  
+our: erase a high-level visual concept
+### inspiration and source
+set-like composition?
+**energy-based models** EBM  
+A and not B as the difference between log probability densities for A and B
+[10], [11], [37], [38]  
+score based composition  
+reference: 
+<!-- ![alt text](<>) -->
+(source/Kimi.jpg)
+future: EBM, stable, practical
+
 
 
 ---
