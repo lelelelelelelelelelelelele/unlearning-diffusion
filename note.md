@@ -65,7 +65,7 @@ generate image
 ![alt text](source/sampling.jpg)
 strangeness: elinimate the predicted noise and add a new one afterward (plus signal)
 
-### theory
+### theorys
 map the generated **distribution** to the actual world distribution
 Q: to measure the similarity of the two distribution
 A: maximum likelihood Estimation:(MLE)  
@@ -79,6 +79,7 @@ KL diverges: 衡量两种分布差异程度
 非对称性 assymmetry
 #### VAE encoder & diffusion model
 q(z|x)
+given the image:x, the distribution of the latent space (p(z|x))
 z: distribution (major Gaussians) given the data x (x -> image to imitate)
 <!-- maximize lower bound -->
 maximize *lower bound of logP(x)*
