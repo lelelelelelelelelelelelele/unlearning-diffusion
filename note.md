@@ -23,12 +23,13 @@ mid journey: during training process, illustrates the results encoded from the d
 
    - **CLIP**: An additional Image Encoder model
    CLIP score: the vectors similarity between the encoded text and encoded generated image representations
+   multimodal encoder
 
 #### decoder: 
 feature: Training without knowing the correspondence between images and text 
 intermediate: 
 - compressed image: sample and downsample -> train
-- latent representation:  auto-encoder  ??
+- latent representation:  auto-encoder  
     - input: H\*W\*3 latent: h\*w\*c (exceeding vision dimension)
 
 #### generation model:
@@ -51,9 +52,8 @@ loss function during training:
 <span style="color: red;">inside</span>:  weighted sum, noising  
   the larger t is, the more proportion the noise added  
 <span style="color: blue;">$\epsilon_\theta$</span> : noise predictor
-input: noiy image + t(step/iteration)
+input: noisy image + t(step/iteration)
 output: predicted noise image  
-
 compared with the target noise you have sampled in **step 4**  
 
 **difference with origin steps**
@@ -67,7 +67,7 @@ strangeness: elinimate the predicted noise and add a new one afterward (plus sig
 
 ### theory
 map the generated **distribution** to the actual world distribution
-Q: to measure the similarity of the two-
+Q: to measure the similarity of the two distribution
 A: maximum likelihood Estimation:(MLE)  
   $P_\theta(x)<->P_{data}(x)$  
   sample  
@@ -76,18 +76,16 @@ A: maximum likelihood Estimation:(MLE)
 #### KL divergence 
 KL diverges: 衡量两种分布差异程度
   definition：$D_{KL}(P \| Q) = \int p(x) \log \left(\frac{p(x)}{q(x)}\right) dx$
-非对称性
+非对称性 assymmetry
 #### VAE encoder & diffusion model
 q(z|x)
 z: distribution (major Gaussians) given the data x (x -> image to imitate)
-maximize louwer bound
+<!-- maximize lower bound -->
 maximize *lower bound of logP(x)*
 VAE:
 $\mathbb{E}_{q(z|x)}[\log{\frac{p(x,z)}{q(z|x)}} ]$
 DDPM: z->x_0
 $\mathbb{E}_{q(x_1:x_T|x)}[\log{\frac{p(x_0:x_T)}{q(x_1:x_T|x)}} ]$
-
-course:C5 000
 
 ## unlearning
 
