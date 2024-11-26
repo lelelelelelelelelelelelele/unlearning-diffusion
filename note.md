@@ -65,7 +65,7 @@ generate image
 ![alt text](source/sampling.jpg)
 strangeness: elinimate the predicted noise and add a new one afterward (plus signal)
 
-### theorys
+### theory
 map the generated **distribution** to the actual world distribution
 Q: to measure the similarity of the two distribution
 A: maximum likelihood Estimation:(MLE)  
@@ -88,10 +88,15 @@ $\mathbb{E}_{q(z|x)}[\log{\frac{p(x,z)}{q(z|x)}} ]$
 DDPM: z->x_0
 $\mathbb{E}_{q(x_1:x_T|x)}[\log{\frac{p(x_0:x_T)}{q(x_1:x_T|x)}} ]$
 
-## unlearning
+## diffusers
+### unet
+1. Additionally, the stable diffusion U-Net is able to condition its output on text-embeddings via **cross-attention** layers.
+2. short-cut connections are usually added between the downsampling ResNets of the encoder to the upsampling ResNets of the decoder
+3. The cross-attention layers are added to both the encoder and decoder part of the U-Net usually between ResNet blocks.
 
-### related work
-#### concept censorship
+## unlearning (erasing concepts)  
+### related work  
+#### concept censorship  
 Prior approaches have focused on **dataset filtering [30], post-generation filtering [29], or inference guiding [38]**
 - removal or guidance
 post-hoc: using classifier after training
@@ -101,11 +106,12 @@ sota guidance-based approach
 - image cloaking
   adding adversarial perturbations
 #### model edit
-GAN -> diffusion model
-by a token for a new subject trained using only a handful of images
+GAN -> diffusion model  
+by a token for a new subject trained using only a handful of images  
 #### unlearning
 previous assumption: unintentional memorization; undesired knowledfe is identifiable on a set of training data points  
 our: erase a high-level visual concept
+fine tune  
 ### inspiration and source
 set-like composition?
 **energy-based models** EBM  
@@ -115,8 +121,12 @@ score based composition
 reference: 
 <!-- ![alt text](<>) -->
 (source/Kimi.jpg)
-future: EBM, stable, practical
-
+### limitation
+interference of others
+trade off on the erasing effect and interference
+tends to erase only the main elements
+E: discard the car
+![alt text](edited_car.png)
 
 
 ---
