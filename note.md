@@ -80,6 +80,7 @@ KL diverges: 衡量两种分布差异程度
 #### VAE encoder & diffusion model
 q(z|x)
 given the image:x, the distribution of the latent space (p(z|x))
+also called posterior distribution  
 z: distribution (major Gaussians) given the data x (x -> image to imitate)
 <!-- maximize lower bound -->
 maximize *lower bound of logP(x)*
@@ -88,11 +89,22 @@ $\mathbb{E}_{q(z|x)}[\log{\frac{p(x,z)}{q(z|x)}} ]$
 DDPM: z->x_0
 $\mathbb{E}_{q(x_1:x_T|x)}[\log{\frac{p(x_0:x_T)}{q(x_1:x_T|x)}} ]$
 
+reparameterize trick:
+$z=μ_λ​+σ_λ⊙\epsilon$  
+
+
 ## diffusers
 ### unet
 1. Additionally, the stable diffusion U-Net is able to condition its output on text-embeddings via **cross-attention** layers.
 2. short-cut connections are usually added between the downsampling ResNets of the encoder to the upsampling ResNets of the decoder
 3. The cross-attention layers are added to both the encoder and decoder part of the U-Net usually between ResNet blocks.
+
+下采样、中间层、上采样
+![alt text](source/block.png)
+而Transformer2DModel也使用了嵌入（包含交叉注意力和自注意力），提供指导信息（context）的时候就执行交叉注意力，否则就执行自注意力，例如我的输入是 X ，context 是 E，如果 E 不为空我们就对 X 和 E 执行自注意力操作（即使用 X 的变换作为 Q 、使用 E 的两个变换分别作为 KV），如果 E 为空我们就对 X 和 X 执行注意力操作（即 KQV 由 X 的三个线性变换得到），前者是交叉注意力，后者是自注意力
+\* Conv2d 并没有进行size放缩
+即通过文本得到图像中文本对应的内容，并将其给予更高的权重，比如我们给定文字中有猫，那么经过交叉注意力计算后，图像中猫的区域就会被**标记**出来。
+
 
 ## unlearning (erasing concepts)  
 ### related work  
@@ -128,5 +140,9 @@ tends to erase only the main elements
 E: discard the car
 ![alt text](edited_car.png)
 
+## experiments
+### metrics
+1. Tuomas Kynka ̈a ̈nniemi, Tero Karras, Samuli Laine, Jaakko Lehtinen, and Timo Aila. Improved precision and recall metric for assessing generative models. CoRR, abs/1904.06991, 2019.
+2. FID
 
 ---
