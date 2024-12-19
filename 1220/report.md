@@ -80,3 +80,17 @@ adversary
 a new layer after cross attention layer
 'we present an adversarial prompt learning scheme to induce the model to produce images of previously erased concepts, followed by optimizing the model against such image generation.'
 ![alt text](receler.png)
+
+result: 
+```python
+data = [
+    ['cars on the road', 123, 1],
+    ['a car and a bicycle', 456, 2],
+]
+```
+generated:
+![alt text](test1_0.png)
+![alt text](test2_0.png) 
+lowweight(12MB) -> ESD(160MB)
+long training time (adversary)
+![alt text](trainingtime_receler.png)
