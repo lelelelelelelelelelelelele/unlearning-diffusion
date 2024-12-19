@@ -40,6 +40,23 @@ text(additional): condition (can be ignored during inferation)
 train a noise predictor
 denoising: initialized by sampling normal distribution noise
 
+#### SR3
+purpose: super-resolution
+method: 
+  - condition: low resolution image
+  - output: super-resolution
+SR3通过一个随机迭代去噪过程来执行超分辨率，输出图像以纯高斯噪声初始化，并使用一个在不同噪声水平下训练的U-Net架构进行迭代细化
+
+application: cascade after a generative model
+级联图像生成中发挥作用，即将一个生成模型与超分辨率模型链式连接，以合成具有竞争性的FID分数的高分辨率图像
+
+**image preprocessing**: 
+1. downsample f=4, and then 双三次插值（bicubic interpolation）
+2. alternative: degration pipeline from [105], which is：
+The BSR-degradation process is a degradation pipline which applies JPEG compressions noise, camera sensor noise, different image interpolations for downsampling, Gaussian blur kernels and Gaussian noise in a random order to an image.
+[105]: K. Zhang, Jingyun Liang, Luc Van Gool, and Radu Timofte. Designing a practical degradation model for deep blind image super-resolution. ArXiv, abs/2103.14006, 2021.
+
+
 ### algorithm  
 #### part 1 training
 
@@ -104,7 +121,7 @@ $z=μ_λ​+σ_λ⊙\epsilon$
 而Transformer2DModel也使用了嵌入（包含交叉注意力和自注意力），提供指导信息（context）的时候就执行交叉注意力，否则就执行自注意力，例如我的输入是 X ，context 是 E，如果 E 不为空我们就对 X 和 E 执行自注意力操作（即使用 X 的变换作为 Q 、使用 E 的两个变换分别作为 KV），如果 E 为空我们就对 X 和 X 执行注意力操作（即 KQV 由 X 的三个线性变换得到），前者是交叉注意力，后者是自注意力
 \* Conv2d 并没有进行size放缩
 即通过文本得到图像中文本对应的内容，并将其给予更高的权重，比如我们给定文字中有猫，那么经过交叉注意力计算后，图像中猫的区域就会被**标记**出来。
-
+The non-pooled output of the text encoder is fed into the UNet backbone of the latent diffusion model via cross-attention.
 
 ## unlearning (erasing concepts)  
 ### related work  
