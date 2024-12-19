@@ -88,9 +88,14 @@ data = [
     ['a car and a bicycle', 456, 2],
 ]
 ```
-generated:
+generated:  
+
+
 ![alt text](test1_0.png)
+
 ![alt text](test2_0.png) 
+
+
 lowweight(12MB) -> ESD(160MB)
 long training time (adversary)
 ![alt text](trainingtime_receler.png)
