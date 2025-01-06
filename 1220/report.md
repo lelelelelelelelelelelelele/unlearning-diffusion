@@ -23,7 +23,7 @@ Stablediffusion pipeline: negative prompt
 ![alt text](1.png)
 ![alt text](2.png)
 negative embedding -> unconditional prompt
-\epsilon(x_t, c) => \epsilon(x_t) + \eta(\epsilon(x_t, c) - \epsilon(x_t, d))
+$\epsilon(x_t, c) => \epsilon(x_t) + \eta(\epsilon(x_t, c) - \epsilon(x_t, d))$
 $P(x|c) \propto P(x) * (P(x|c)/P(x))^\eta
 ->P(x|c) \propto P(x) * (P(x|c)/P(x|d))^\eta$
 
