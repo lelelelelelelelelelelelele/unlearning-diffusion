@@ -155,7 +155,7 @@ interference of others
 trade off on the erasing effect and interference
 tends to erase only the main elements
 E: discard the car
-![alt text](edited_car.png)
+![alt text](source/edited_car.png)
 
 ## experiments
 ### metrics
