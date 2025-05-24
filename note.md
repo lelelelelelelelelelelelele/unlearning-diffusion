@@ -99,12 +99,33 @@ q(z|x)
 given the image:x, the distribution of the latent space (p(z|x))
 also called posterior distribution  
 z: distribution (major Gaussians) given the data x (x -> image to imitate)
-<!-- maximize lower bound -->
-maximize *lower bound of logP(x)*
+see the prediction as the mean of a Gaussian instead of a certain point
+
+maximize *lower bound of logP(x)* = 
 VAE:
 $\mathbb{E}_{q(z|x)}[\log{\frac{p(x,z)}{q(z|x)}} ]$
 DDPM: z->x_0
 $\mathbb{E}_{q(x_1:x_T|x)}[\log{\frac{p(x_0:x_T)}{q(x_1:x_T|x)}} ]$
+$P_\theta(x_{t-1}|x_t) \propto e^{-||G(x_t)-x_{t-1}||_2}$
+where **$p_\theta$** means the probability of generate X
+
+#### 2
+展开
+等价于 minimum：
+$KL(q(x_{t-1}|x_t,x_0)||P(x_{t-1}|x_t))$
+q:data distribution
+already known&fixed: Gaussian with mean = \alpha, Variance = \beta
+-> let the mean of $P(x_{t-1}|x_t)$ next to the center of q
+where q mean = $\mu_\theta(x_t, t) = \frac{1}{\sqrt{\alpha_t}} \left( x_t - \frac{1 - \alpha_t}{\sqrt{1 - \overline{\alpha}_t}} \epsilon_\theta(x_t, t) \right)$
+exactly the $q(x_{t-1}|x_t,x_0)$in previous KL formula
+so, training the Denoise model to predict q mean
+only **$\epsilon_\theta(x_t, t)$** unknown
+
+#### 3(remark)
+sampling
+why + $\sigma_t z$
+instead of use the mean
+protect the property of probability
 
 reparameterize trick:
 $z=μ_λ​+σ_λ⊙\epsilon$  
